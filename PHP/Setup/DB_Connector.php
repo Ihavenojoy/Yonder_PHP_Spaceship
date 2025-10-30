@@ -3,8 +3,7 @@
 namespace Setup;
 use PDO;
 
-require 'vendor/autoload.php';
-
+require(__DIR__ . '/../../vendor/autoload.php');
 function GetENVSecrets(): array
 {
     // De array wordt hier direct gevuld met de waarden uit $_ENV

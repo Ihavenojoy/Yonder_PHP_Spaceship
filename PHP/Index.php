@@ -6,7 +6,7 @@ require_once 'Entities/Room.php';
 require_once 'Entities/Armory.php';
 require_once 'Entities/Weapon.php';
 require_once 'Setup/DB_Connector.php';
-require_once 'Interface';
+require_once 'Interfaces/Entities/IArmory.php';
 
 $TestArmory = new Armory("Test Armory",25,25);
 $TestWeapon = new Weapon("Handgun",1,4,12,3);
