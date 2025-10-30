@@ -1,44 +1,59 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
+# ----------------------------------------------------
+# 1. Composer (PHP Dependencies)
+# ----------------------------------------------------
+/vendor/
+/composer.phar
+# Optionally ignore the composer generated autoload file from the source dir if it's there
+# vendor is preferred for autoloader, but sometimes projects put autoload.php in root:
+# /autoload.php
 
+# ----------------------------------------------------
+# 2. Environment/Configuration Files (Secrets)
+# ----------------------------------------------------
+# Crucial: Exclude all environment files containing secrets
 .env
+.env.local
+.env.*.local
+.env.test
 
-node_modules
+# Optionally ignore common backup/example files for .env
+.env.bak
+.env.save
+
+# ----------------------------------------------------
+# 3. Operating System & Editor Files
+# ----------------------------------------------------
+# macOS/OS X
 .DS_Store
-dist
-dist-ssr
-coverage
-*.local
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+# Windows
+Thumbs.db
+ehthumbs.db
 
-*.tsbuildinfo
+# JetBrains IDEs (PHPStorm, WebStorm, etc.)
+.idea/
+*.iml
 
-.eslintcache
+# VS Code
+.vscode/
 
-# Cypress
-/cypress/videos/
-/cypress/screenshots/
+# Vim/Nano/Gedit temp files
+*.swp
+*~
 
-# Vitest
-__screenshots__/
-vendor/vlucas/phpdotenv/
-vendor/symfony/polyfill-php80/
-vendor/symfony/polyfill-mbstring/
-vendor/symfony/polyfill-ctype/
-vendor/phpoption/phpoption/
-vendor/graham-campbell/result-type/
+# ----------------------------------------------------
+# 4. Common Framework/Cache/Log Directories
+# ----------------------------------------------------
+# Laravel / Symfony / General Caching/Logs
+/storage/
+/bootstrap/cache/
+/public/build/
+/var/
+/log/
+/logs/
+/temp/
+/tmp/
+
+# Common test coverage files
+/coverage/
+.phpunit.cache
