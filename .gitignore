@@ -34,3 +34,9 @@ coverage
 
 # Vitest
 __screenshots__/
+vendor/vlucas/phpdotenv/
+vendor/symfony/polyfill-php80/
+vendor/symfony/polyfill-mbstring/
+vendor/symfony/polyfill-ctype/
+vendor/phpoption/phpoption/
+vendor/graham-campbell/result-type/
