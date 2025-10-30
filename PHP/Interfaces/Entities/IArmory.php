@@ -1,6 +1,6 @@
 <?php
 
-namespace Interfaces\Entities;
+Namespace Interfaces\Entities;
 
 use Weapon;
 

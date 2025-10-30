@@ -4,6 +4,7 @@ use Interfaces\Entities\IArmory;
 
 require_once 'Room.php';
 require_once 'Weapon.php';
+require_once 'Interfaces\Entities\IArmory.php';
 class Armory extends Room implements IArmory
 {
     public array $Weapons;
