@@ -42,7 +42,24 @@ ehthumbs.db
 *~
 
 # ----------------------------------------------------
-# 4. Common Framework/Cache/Log Directories
+# 4. Node/NPM Dependencies (Common for Vue/Frontend projects) 📦
+# ----------------------------------------------------
+# Node modules directory
+/node_modules/
+
+# NPM debug log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Vue CLI/Vite common build output directory
+# NOTE: This may need adjustment based on your specific build configuration
+/dist/
+/out/
+/build/
+
+# ----------------------------------------------------
+# 5. Common Framework/Cache/Log Directories
 # ----------------------------------------------------
 # Laravel / Symfony / General Caching/Logs
 /storage/
