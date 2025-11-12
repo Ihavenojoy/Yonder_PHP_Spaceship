@@ -42,16 +42,16 @@ class Spaceship
         $this->Fuel = $Fuel;
     }
 
-    public function AddCanon(Canon $canon)
+    public function AddCanon(Canon $Canon)
     {
-        $this->Cannons[] = $canon;
+        $this->Cannons[] = $Canon;
     }
 
-    public function RemoveCanon(Canon $canonToRemove) : bool
+    public function RemoveCanon(Canon $CanonToRemove) : bool
     {
-        foreach ($this->Cannons as $key => $existingCanon)
+        foreach ($this->Cannons as $key => $ExistingCanon)
         {
-            if ($existingCanon === $canonToRemove)
+            if ($ExistingCanon === $CanonToRemove)
             {
                 unset($this->Cannons[$key]);
                 return true;

@@ -14,7 +14,7 @@ class WeaponDAL
     {
         $this->DB_Connector = new DB_Connector();
     }
-    public function GetWeapon($weaponId): ?Weapon //DTO?
+    public function GetWeapon($weaponId): ?Weapon
     {
         $pdo = $this->DB_Connector->getPDO();
 
@@ -36,7 +36,7 @@ class WeaponDAL
                 return $weaponObject;
             } catch (Exception $e) {
                 error_log("Probleem overzetten object database naar php: " . $e->getMessage());
-                return null; // Geen wapen gevonden
+                return null;
             }
 
         } catch (\PDOException $e) {
