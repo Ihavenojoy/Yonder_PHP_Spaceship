@@ -1,5 +1,8 @@
 <?php
 
+use Entities\Fleet;
+
+Require_once 'Canon.php';
 class Spaceship
 {
     public string $Name;
@@ -11,6 +14,7 @@ class Spaceship
         $this->Name = $Name;
         $this->Hitpoints = $Hitpoints;
         $this->Fuel = $Fuel;
+        $this->Cannons = [];
     }
 
     public function getName(): string
@@ -58,6 +62,33 @@ class Spaceship
             }
         }
         return false;
+    }
+
+    public function Attack(Spaceship $Attacked_Spaceship)
+    {
+        foreach ($this->Cannons as $Live_Cannon)
+        {
+            if ($Live_Cannon->Recharge == 0)
+            {
+                $DealtDamage = random_int($Live_Cannon->MinimumDamage, $Live_Cannon->MaximumDamage);
+                $Attacked_Spaceship->Hitpoints -= $DealtDamage;
+                echo("\nSpaceship {$this->Name} viel spaceship {$Attacked_Spaceship->Name} en heeft {$DealtDamage} schade gedaan");
+                $Live_Cannon->Recharge = $Live_Cannon->RechargeTime;
+            }
+            else
+            {
+                $Live_Cannon->Recharge--;
+            }
+        }
+    }
+
+    public function AttackFleet(Fleet $Target_Fleet): void
+    {
+        // Kies een willekeurig levend schip uit de doelwitvloot
+        $attacked_spaceship = $Target_Fleet->getAvailableShip();
+
+        // Voer dan de aanval uit zoals eerder gedefinieerd:
+        $this->Attack($attacked_spaceship);
     }
 
 }

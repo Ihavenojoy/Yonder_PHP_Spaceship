@@ -20,5 +20,4 @@ class Armory extends Room implements IArmory
         echo ("{$this->Name} Added {$weapon}");
         return true;
     }
-
 }
