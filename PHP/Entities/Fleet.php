@@ -25,14 +25,40 @@ class Fleet
     public function removeDeadShips(): void
     {
         $activeShips = [];
-        foreach ($this->Ships as $key => $ship) {
+        foreach ($this->Ships as $ship) {
             if ($ship->Hitpoints <= 0) {
-                $this->LostShips[] = $ship;
+                // ensure we don't duplicate in LostShips
+                $alreadyLost = false;
+                foreach ($this->LostShips as $ls) {
+                    if ($ls === $ship) { $alreadyLost = true; break; }
+                }
+                if (!$alreadyLost) {
+                    $this->LostShips[] = $ship;
+                }
             } else {
                 $activeShips[] = $ship;
             }
         }
         $this->Ships = $activeShips;
+    }
+
+    public function removeShip(Spaceship $shipToRemove): void
+    {
+        $active = [];
+        foreach ($this->Ships as $ship) {
+            if ($ship === $shipToRemove) {
+                // add to lost if not already present
+                $alreadyLost = false;
+                foreach ($this->LostShips as $ls) {
+                    if ($ls === $ship) { $alreadyLost = true; break; }
+                }
+                if (!$alreadyLost) $this->LostShips[] = $ship;
+                // skip adding to active
+                continue;
+            }
+            $active[] = $ship;
+        }
+        $this->Ships = $active;
     }
 
     public function getShips(): int
@@ -43,18 +69,24 @@ class Fleet
         return count($active_ships);
     }
 
-    public function getAvailableShip(): Spaceship
+    public function getRandomAliveShip(): Spaceship
     {
-        $active_ships = array_filter($this->Ships, function($ship) {
+        $active_ships = array_values(array_filter($this->Ships, function($ship) {
             return $ship->Hitpoints > 0;
-        });
+        }));
 
         if (empty($active_ships)) {
             throw new \Exception("Geen beschikbaar schip gevonden in de vloot.");
         }
 
-        $random_index = array_rand($active_ships);
-        return $active_ships[$random_index];
+        return $active_ships[array_rand($active_ships)];
+    }
+
+    public function hasAvailableShip(): bool {
+        foreach ($this->Ships as $ship) {
+            if ($ship->Hitpoints > 0) return true;
+        }
+        return false;
     }
 
     public function getFleetName(): string

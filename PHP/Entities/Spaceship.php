@@ -3,12 +3,14 @@
 use Entities\Fleet;
 
 Require_once 'Canon.php';
+
 class Spaceship
 {
     public string $Name;
     public int $Hitpoints;
     public int $Fuel;
     public array $Cannons;
+
     public function __construct(string $Name, int $Hitpoints, int $Fuel)
     {
         $this->Name = $Name;
@@ -36,6 +38,7 @@ class Spaceship
     {
         $this->Hitpoints = $Hitpoints;
     }
+
     public function getFuel(): int
     {
         return $this->Fuel;
@@ -58,37 +61,45 @@ class Spaceship
             if ($ExistingCanon === $CanonToRemove)
             {
                 unset($this->Cannons[$key]);
+                $this->Cannons = array_values($this->Cannons);
                 return true;
             }
         }
         return false;
     }
 
-    public function Attack(Spaceship $Attacked_Spaceship)
+    public function Attack(Spaceship $Attacked_Spaceship): int
     {
+        $totalDamage = 0;
         foreach ($this->Cannons as $Live_Cannon)
         {
-            if ($Live_Cannon->Recharge == 0)
+            if (!isset($Live_Cannon->MinimumDamage) || !isset($Live_Cannon->MaximumDamage) || !isset($Live_Cannon->RechargeTime)) {
+                continue;
+            }
+
+            if (!isset($Live_Cannon->Recharge)) {
+                $Live_Cannon->Recharge = 0;
+            }
+
+            if ($Live_Cannon->Recharge <= 0)
             {
-                $DealtDamage = random_int($Live_Cannon->MinimumDamage, $Live_Cannon->MaximumDamage);
-                $Attacked_Spaceship->Hitpoints -= $DealtDamage;
-                echo("\nSpaceship {$this->Name} viel spaceship {$Attacked_Spaceship->Name} en heeft {$DealtDamage} schade gedaan");
-                $Live_Cannon->Recharge = $Live_Cannon->RechargeTime;
+                $min = max(0, (int)$Live_Cannon->MinimumDamage);
+                $max = max($min, (int)$Live_Cannon->MaximumDamage);
+                $DealtDamage = random_int($min, $max);
+                $Attacked_Spaceship->Hitpoints = max(0, $Attacked_Spaceship->Hitpoints - $DealtDamage);
+                $totalDamage += $DealtDamage;
+
+                echo "\nSpaceship {$this->Name} viel spaceship {$Attacked_Spaceship->Name} en heeft {$DealtDamage} schade gedaan (HP doel: {$Attacked_Spaceship->Hitpoints})";
+
+                $Live_Cannon->Recharge = (int)$Live_Cannon->RechargeTime;
             }
             else
             {
                 $Live_Cannon->Recharge--;
+                if ($Live_Cannon->Recharge < 0) $Live_Cannon->Recharge = 0;
             }
         }
+
+        return $totalDamage;
     }
-
-    public function AttackFleet(Fleet $Target_Fleet): void
-    {
-        // Kies een willekeurig levend schip uit de doelwitvloot
-        $attacked_spaceship = $Target_Fleet->getAvailableShip();
-
-        // Voer dan de aanval uit zoals eerder gedefinieerd:
-        $this->Attack($attacked_spaceship);
-    }
-
 }

@@ -13,6 +13,4 @@ class Room
         $this->With = $With;
     }
 
-    //hallo
-
 }
