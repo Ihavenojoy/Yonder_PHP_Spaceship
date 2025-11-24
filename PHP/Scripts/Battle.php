@@ -129,11 +129,9 @@ class Battle
         if ($survivor_count === 1) {
             $winner = $survivor_fleets[0];
             $msg = "\nVICTORY! Vloot '{$winner->getFleetName()}' heeft de strijd gewonnen met {$winner->getShips()} schepen over.";
-            echo $msg;
             return $msg;
         } elseif ($survivor_count === 0) {
             $msg = "\nDRAW. Alle vloten zijn vernietigd. Er is geen winnaar.";
-            echo $msg;
             return $msg;
         }
 
