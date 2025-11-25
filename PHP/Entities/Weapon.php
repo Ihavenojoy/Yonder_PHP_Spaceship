@@ -17,6 +17,56 @@ class Weapon
         $this->Ammo = $Ammo;
     }
 
+        public function GetName(): string
+    {
+        return $this->Name;
+    }
+
+    public function GetMinimumDamage(): int
+    {
+        return $this->MinimumDamage;
+    }
+
+    public function GetMaximumDamage(): int
+    {
+        return $this->MaximumDamage;
+    }
+
+    public function GetMagazineSize(): int
+    {
+        return $this->MagazineSize;
+    }
+
+    public function GetAmmo(): int
+    {
+        return $this->Ammo;
+    }
+
+    public function SetName(string $name): void
+    {
+        $this->Name = $name;
+    }
+
+    public function SetMinimumDamage(int $minimumDamage): void
+    {
+        $this->MinimumDamage = $minimumDamage;
+    }
+
+    public function SetMaximumDamage(int $maximumDamage): void
+    {
+        $this->MaximumDamage = $maximumDamage;
+    }
+
+    public function SetMagazineSize(int $magazineSize): void
+    {
+        $this->MagazineSize = $magazineSize;
+    }
+
+    public function SetAmmo(int $ammo): void
+    {
+        $this->Ammo = $ammo;
+    }
+
     public function __toString()
     {
         return "Weapon: {$this->Name}, Damage: {$this->MinimumDamage}/{$this->MaximumDamage}, Ammo: {$this->Ammo}/{$this->MagazineSize}";

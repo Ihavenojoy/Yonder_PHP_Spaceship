@@ -44,4 +44,34 @@ class WeaponDAL
             return null;
         }
     }
+
+        public function insertWeapon(Weapon $weapon): ?int
+        {
+            $pdo = $this->DB_Connector->getPDO();
+
+            $sql = "INSERT INTO weapons 
+                    (Name, MinimumDamage, MaximumDamage, MagazineSize, Ammo) 
+                    VALUES 
+                    (:name, :minDamage, :maxDamage, :magSize, :ammo)";
+            
+            try {
+                $stmt = $pdo->prepare($sql);
+                
+                // 1. Bind values from the Weapon object
+                $stmt->bindValue(':name', $weapon->GetName(), \PDO::PARAM_STR);
+                $stmt->bindValue(':minDamage', $weapon->GetMinimumDamage(), \PDO::PARAM_INT);
+                $stmt->bindValue(':maxDamage', $weapon->GetMaximumDamage(), \PDO::PARAM_INT);
+                $stmt->bindValue(':magSize', $weapon->GetMagazineSize(), \PDO::PARAM_INT);
+                $stmt->bindValue(':ammo', $weapon->GetAmmo(), \PDO::PARAM_INT);
+                
+                $stmt->execute();
+
+                $newId = $pdo->lastInsertId();
+                return $newId ? (int)$newId : null;
+
+            } catch (\PDOException $e) {
+                error_log("Database fout bij invoegen wapen: " . $e->getMessage());
+                return null;
+            }
+        }
 }
