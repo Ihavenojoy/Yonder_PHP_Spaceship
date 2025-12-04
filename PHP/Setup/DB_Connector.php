@@ -50,10 +50,10 @@ class DB_Connector
     {
         // Add logic here to return the connected PDO object
         // For simplicity, we assume $this->pdo is initialized and holds it.
-        return $this->pdo;public function Test_Connection()
+        return $this->pdo;
     }
 
-
+    public function testconnection()    
     {
         try {
             $pdo = new PDO($this->dsn, $this->user, $this->pass);
