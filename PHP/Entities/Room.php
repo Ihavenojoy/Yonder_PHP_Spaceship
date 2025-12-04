@@ -13,4 +13,8 @@ class Room
         $this->With = $With;
     }
 
+    public function roomsize()
+    {
+        return $this->Length * $this->With;
+    }
 }

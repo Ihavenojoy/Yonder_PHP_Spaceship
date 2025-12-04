@@ -58,3 +58,6 @@ $Battle->AddFleet($ChallengerFleet);
 $Battle->AddFleet($FalconFleet);
 $Battle->AddFleet($ViperFleet);
 $Battle->Start();
+
+$Armory = new Armory("Steve" , 5,5);
+$Armory->roomsize();
