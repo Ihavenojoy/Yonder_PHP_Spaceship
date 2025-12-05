@@ -11,7 +11,6 @@ $dotenv->load();
 
 function GetENVSecrets(): array
 {
-    // De array wordt hier direct gevuld met de waarden uit $_ENV
     $secrets = [
         'host'    => $_ENV['MYSQL_HOST'],
         'db'      => $_ENV['MYSQL_DB'],
@@ -48,8 +47,6 @@ class DB_Connector
 
     public function getPDO(): ?\PDO
     {
-        // Add logic here to return the connected PDO object
-        // For simplicity, we assume $this->pdo is initialized and holds it.
         return $this->pdo;
     }
 
@@ -57,7 +54,6 @@ class DB_Connector
     {
         try {
             $pdo = new PDO($this->dsn, $this->user, $this->pass);
-            // Voeg hier eventueel opties toe, zoals in het vorige antwoord
             echo "\nVerbinding succesvol gemaakt met de database: " . $this->db;
         } catch (\PDOException $e) {
             echo "\nFout bij verbinding: " . $e->getMessage();
