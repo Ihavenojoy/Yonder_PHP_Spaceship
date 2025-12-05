@@ -1,6 +1,8 @@
 <?php
 
-class Weapon
+use Interfaces\Entities\IWeapon;
+
+class Weapon implements IWeapon
 {
     public string $Name;
     public int $MinimumDamage;

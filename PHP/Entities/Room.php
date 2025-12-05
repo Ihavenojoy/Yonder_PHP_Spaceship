@@ -1,6 +1,8 @@
 <?php
 
-class Room
+use Interfaces\Entities\IRoom;
+
+class Room implements IRoom
 {
     public string $Name;
     public int $Length;
@@ -13,7 +15,7 @@ class Room
         $this->With = $With;
     }
 
-    public function roomsize()
+    public function roomSize()
     {
         return $this->Length * $this->With;
     }

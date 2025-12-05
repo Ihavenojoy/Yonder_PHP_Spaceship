@@ -1,6 +1,8 @@
 <?php
 
-class Canon
+use Interfaces\Entities\ICanon;
+
+class Canon implements ICanon
 {
     public string $Name;
     public int $MinimumDamage;

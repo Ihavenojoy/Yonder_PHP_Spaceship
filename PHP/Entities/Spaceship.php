@@ -1,10 +1,11 @@
 <?php
 
 use Entities\Fleet;
+use Interfaces\Entities\ISpaceship;
 
 Require_once 'Canon.php';
 
-class Spaceship
+class Spaceship implements ISpaceship
 {
     public string $Name;
     public int $Hitpoints;

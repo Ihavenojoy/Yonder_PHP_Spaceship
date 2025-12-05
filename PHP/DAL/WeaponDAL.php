@@ -8,6 +8,7 @@ use Weapon;
 
 class WeaponDAL
 {
+    
     private $DB_Connector;
 
     public function __construct()
@@ -57,7 +58,6 @@ class WeaponDAL
             try {
                 $stmt = $pdo->prepare($sql);
                 
-                // 1. Bind values from the Weapon object
                 $stmt->bindValue(':name', $weapon->GetName(), \PDO::PARAM_STR);
                 $stmt->bindValue(':minDamage', $weapon->GetMinimumDamage(), \PDO::PARAM_INT);
                 $stmt->bindValue(':maxDamage', $weapon->GetMaximumDamage(), \PDO::PARAM_INT);

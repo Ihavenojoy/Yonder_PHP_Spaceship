@@ -2,9 +2,10 @@
 
 namespace Entities;
 
+use Interfaces\Entities\IFleet;
 use Spaceship;
 
-class Fleet
+class Fleet implements IFleet
 {
     public string $FleetName;
     public array $Ships;
